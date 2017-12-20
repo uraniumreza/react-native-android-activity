@@ -12,19 +12,19 @@ import {
   NativeModules,
   StyleSheet,
   Text,
-  View
+  View,
 } from 'react-native';
 
-import BatchedBridge from "react-native/Libraries/BatchedBridge/BatchedBridge";
+import BatchedBridge from 'react-native/Libraries/BatchedBridge/BatchedBridge';
 
 export class ExposedToJava {
   alert(message) {
-      alert(message);
+    alert(message);
   }
 }
 
 const exposedToJava = new ExposedToJava();
-BatchedBridge.registerCallableModule("JavaScriptVisibleToJava", exposedToJava);
+BatchedBridge.registerCallableModule('JavaScriptVisibleToJava', exposedToJava);
 
 const activityStarter = NativeModules.ActivityStarter;
 
@@ -32,9 +32,7 @@ export default class ActivityDemoComponent extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
+        <Text style={styles.welcome}>Welcome to React Native!</Text>
         <Text style={styles.instructions}>
           To get started, edit index.android.js
         </Text>
@@ -44,35 +42,41 @@ export default class ActivityDemoComponent extends Component {
         </Text>
         <View style={styles.buttonContainer}>
           <Button
-            onPress={() => activityStarter.navigateToExample()}
-            title='Start example activity'
+            onPress={() => activityStarter.navigateToExample(10)}
+            title="Start example activity"
           />
           <Button
             onPress={() => activityStarter.dialNumber('+1 (234) 567-8910')}
-            title='Dial +1 (234) 567-8910'
+            title="Dial +1 (234) 567-8910"
           />
           <Button
-            onPress={() => activityStarter.getActivityName((name) => { alert(name); })}
-            title='Get activity name'
+            onPress={() =>
+              activityStarter.getActivityName(name => {
+                alert(name);
+              })
+            }
+            title="Get activity name"
           />
           <Button
             onPress={async () => {
               try {
                 var name = await activityStarter.getActivityNameAsPromise();
                 alert(name);
-                } catch (e) {
-                  alert(e.message);
-                }
-              }}
-            title='Get activity name as promise'
+              } catch (e) {
+                alert(e.message);
+              }
+            }}
+            title="Get activity name as promise"
           />
           <Button
-            onPress={() => NativeModules.Clipboard.setString("Hello from JavaScript!")}
-            title='Copy to clipboard'
+            onPress={() =>
+              NativeModules.Clipboard.setString('Hello from JavaScript!')
+            }
+            title="Copy to clipboard"
           />
           <Button
             onPress={() => activityStarter.callJavaScript()}
-            title='Call JavaScript from Java'
+            title="Call JavaScript from Java"
           />
         </View>
       </View>
@@ -105,7 +109,10 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('ActivityDemoComponent', () => ActivityDemoComponent);
+AppRegistry.registerComponent(
+  'ActivityDemoComponent',
+  () => ActivityDemoComponent,
+);
 
 const eventEmitter = new NativeEventEmitter(activityStarter);
-eventEmitter.addListener(activityStarter.MyEventName, (params) => alert(params));
+eventEmitter.addListener(activityStarter.MyEventName, params => alert(params));
