@@ -42,7 +42,7 @@ export default class ActivityDemoComponent extends Component {
         </Text>
         <View style={styles.buttonContainer}>
           <Button
-            onPress={() => activityStarter.navigateToExample(10)}
+            onPress={() => activityStarter.navigateToExample(16, 36)}
             title="Start example activity"
           />
           <Button

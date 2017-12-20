@@ -23,6 +23,14 @@ import java.util.Map;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import android.app.AlarmManager;
+import android.content.Intent;
+import android.app.PendingIntent;
+import android.content.Context;
+
+import android.widget.Toast;
+import java.util.Calendar;
+
 /**
  * Expose Java to JavaScript.
  */
@@ -58,9 +66,11 @@ class ActivityStarterModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    void navigateToExample(int x) {
+    void navigateToExample(int x, int y) {
         Activity activity = getCurrentActivity();
-        if (activity != null && x==3) {
+        if (activity != null) {
+            //service();
+            notification(x,y) ;
             Intent intent = new Intent(activity, ExampleActivity.class);
             activity.startActivity(intent);
         }
@@ -115,4 +125,31 @@ class ActivityStarterModule extends ReactContextBaseJavaModule {
     static void triggerAlert(@Nonnull String message) {
         eventEmitter.emit("MyEventValue", message);
     }
+      public void service() {
+              Intent intent = new Intent( getReactApplicationContext(), MyAlarmReceiver.class);
+              final PendingIntent pIntent = PendingIntent.getBroadcast(getReactApplicationContext(), MyAlarmReceiver.REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+              long firstMillis = System.currentTimeMillis(); //first run of alarm is immediately //
+              int intervalMillis = 1 * 3 * 1000; //3 Second
+              AlarmManager alarm = (AlarmManager) getReactApplicationContext().getSystemService(Context.ALARM_SERVICE);
+              alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, firstMillis, intervalMillis, pIntent);
+          }
+          private void notification(int h ,int m ){
+                  //Locale alocal = new Locale
+
+                  Calendar calendar = Calendar.getInstance();
+                  // we can set time by open date and time picker dialog
+                  calendar.set(Calendar.HOUR_OF_DAY, h);
+                  calendar.set(Calendar.MINUTE,m);
+                  calendar.set(Calendar.SECOND, 0);
+
+                  //Toast.makeText(this,  showTime(h,m), Toast.LENGTH_SHORT).show();
+                  Intent intent1 = new Intent( getReactApplicationContext(), MyAlarmReceiver.class);
+                  final PendingIntent pIntent = PendingIntent.getBroadcast(getReactApplicationContext(), MyAlarmReceiver.REQUEST_CODE,  intent1 , PendingIntent.FLAG_UPDATE_CURRENT);
+
+                  AlarmManager alarm = (AlarmManager) getReactApplicationContext().getSystemService(Context.ALARM_SERVICE);
+                                  alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pIntent);
+
+
+
+              }
 }

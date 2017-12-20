@@ -6,6 +6,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
 
     <application
         android:name=".MainApplication"
@@ -29,6 +30,10 @@
             android:name=".ExampleActivity"
             android:label="@string/title_activity_example"
         />
+
+        <receiver
+                android:name=".MyAlarmReceiver"
+                android:process=":remote" />
     </application>
 
 </manifest>
