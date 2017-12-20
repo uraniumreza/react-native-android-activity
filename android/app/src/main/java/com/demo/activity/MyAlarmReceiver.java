@@ -57,7 +57,14 @@ public class MyAlarmReceiver extends BroadcastReceiver {
             e.printStackTrace();
         }*/
         //triggerNotification(context, title + "\n" + description);
-        triggerNotification(context, "Demo" + "\n" + "Test");
+        //triggerNotification(context, "Demo" + "\n" + "Test");
+         triggerActivity(context);
+    }
+    private void triggerActivity(Context context) {
+        Intent intentNotification = new Intent("android.intent.category.LAUNCHER");
+          intentNotification.setClassName("com.demo.activity", "com.demo.activity.ExampleActivity");
+          intentNotification.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+          context.startActivity(intentNotification);
     }
     private void triggerNotification(Context contexto, String t) {
         Intent notificationIntent = new Intent(contexto, ExampleActivity.class);
