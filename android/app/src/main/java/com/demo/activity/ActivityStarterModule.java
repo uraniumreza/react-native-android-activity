@@ -135,7 +135,6 @@ class ActivityStarterModule extends ReactContextBaseJavaModule {
           }
           private void notification(int h ,int m ){
                   //Locale alocal = new Locale
-
                   Calendar calendar = Calendar.getInstance();
                   // we can set time by open date and time picker dialog
                   calendar.set(Calendar.HOUR_OF_DAY, h);
@@ -148,8 +147,6 @@ class ActivityStarterModule extends ReactContextBaseJavaModule {
 
                   AlarmManager alarm = (AlarmManager) getReactApplicationContext().getSystemService(Context.ALARM_SERVICE);
                                   alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pIntent);
-
-
 
               }
 }

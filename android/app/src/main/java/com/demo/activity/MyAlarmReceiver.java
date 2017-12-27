@@ -62,7 +62,7 @@ public class MyAlarmReceiver extends BroadcastReceiver {
     }
     private void triggerActivity(Context context) {
         Intent intentNotification = new Intent("android.intent.category.LAUNCHER");
-          intentNotification.setClassName("com.demo.activity", "com.demo.activity.ExampleActivity");
+          intentNotification.setClassName("com.demo.activity", "com.demo.activity.Dialog_Activity");
           intentNotification.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
           context.startActivity(intentNotification);
     }

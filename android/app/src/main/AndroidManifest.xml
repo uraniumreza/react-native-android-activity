@@ -36,6 +36,13 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
         />
+        <activity
+            android:name=".Dialog_Activity"
+            android:label="Dialog Activity"
+            android:excludeFromRecents="true"
+            android:theme="@style/Theme.AppCompat.Dialog">
+
+        </activity>
 
         <receiver
                 android:name=".MyAlarmReceiver"
