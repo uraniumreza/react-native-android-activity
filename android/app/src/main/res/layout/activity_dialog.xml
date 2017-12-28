@@ -36,6 +36,7 @@
             <Button
                 android:text="Reschedule"
                 android:textColor="@color/blue"
+                android:id="@+id/reschedule"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -43,6 +44,7 @@
             <Button
                 android:text="Taken"
                 android:textColor="@color/blue"
+                android:id="@+id/taken"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

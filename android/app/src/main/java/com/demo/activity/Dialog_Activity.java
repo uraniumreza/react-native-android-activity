@@ -7,6 +7,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import com.facebook.react.ReactActivity;
 
+import android.widget.Button;
+import android.app.TimePickerDialog;
+import android.widget.TimePicker;
+import java.util.Calendar;
+
 public class Dialog_Activity extends ReactActivity {
     String[] mobileArray = {"Android","IPhone","WindowsMobile","Blackberry",
             "WebOS","Ubuntu","Windows7","Max OS X"};
@@ -27,6 +32,32 @@ public class Dialog_Activity extends ReactActivity {
                 R.layout.list_item, mobileArray);
         ListView listView = (ListView) findViewById(R.id.mobile_list);
         listView.setAdapter(adapter);
+
+        Button reschedule = (Button) findViewById(R.id.reschedule);
+
+        reschedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showTimePicker();
+            }
+        });
+    }
+
+    protected void showTimePicker()
+    {
+        /**Time Picker*/
+        Calendar mcurrentTime = Calendar.getInstance();
+        int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+        int minute = mcurrentTime.get(Calendar.MINUTE);
+        TimePickerDialog mTimePicker;
+        mTimePicker = new TimePickerDialog(Dialog_Activity.this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                // eReminderTime.setText( selectedHour + ":" + selectedMinute);
+            }
+        }, hour, minute, true);//Yes 24 hour time
+        //  mTimePicker.setTitle("Select Time");
+        mTimePicker.show();
     }
 
 
